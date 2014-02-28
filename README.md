@@ -2,8 +2,12 @@
 
 Uniba Hive data extraction scripts
 
-## Usage
+# Install dependecies
+```
+pip2 install oauth2
+```
 
+## Usage
 ```
 python2 twitter_search.py <latitude,longitude>
 python2 place_search.py <latitude,longitude>
