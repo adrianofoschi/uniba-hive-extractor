@@ -1,5 +1,5 @@
 # Import the relevant libraries
-import oauth2 as oauth
+from requests_oauthlib import OAuth1Session
 import json
 import sys
 
@@ -15,21 +15,15 @@ CONSUMER_SECRET = "aXv2iiYm9OKoLPdZLKHIh8QiixbmdfSsUiTL7KzAV0"
 ACCESS_KEY = "2203839993-KsWpfy9RS0JScT2QsCLtDECxTkqiacG1h3VHrcF"
 ACCESS_SECRET = "X4zHaHQlwoT9nzy3DlIXiQSiuHfFhvYZVV2E6VEfWEdI7"
 
-# Create oauth2 token
-consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET)
-access_token = oauth.Token(key=ACCESS_KEY, secret=ACCESS_SECRET)
-
-# Instantiate the client
-client = oauth.Client(consumer, access_token)
-
 # Create and send the request
-endpoint = ('https://api.twitter.com/1.1/search/tweets.json'
-	'?&geocode=%s,%skm') % (LOCATION, RADIUS)
-response, data = client.request(endpoint)
+twitter = OAuth1Session(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_KEY,ACCESS_SECRET)
+url = ('https://api.twitter.com/1.1/search/tweets.json?'
+         '&geocode=%s,%skm') % (LOCATION, RADIUS)
+r = twitter.get(url)
 
 # Get the response and use the JSON library to decode the JSON
-tweets = json.loads(data)
+tweets = json.loads(r.text)
 
 # Print the statuses
 for status in tweets['statuses']:
-	print json.dumps(status)
+	print(json.dumps(status))

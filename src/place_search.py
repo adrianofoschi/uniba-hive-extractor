@@ -1,5 +1,5 @@
 # Import the relevant libraries
-import urllib2
+from urllib.request import urlopen
 import json
 import sys
 
@@ -15,12 +15,12 @@ AUTH_KEY = "AIzaSyA2aUkM1yzJVr6ZMLAaJsXQss4Fg8g-RI0"
 # Create and send the request
 endpoint = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
          'location=%s&radius=%s&sensor=false&key=%s') % (LOCATION, RADIUS, AUTH_KEY)
-response = urllib2.urlopen(endpoint)
+response = urlopen(endpoint)
 
 # Get the response and use the JSON library to decode the JSON
-json_raw = response.read()
+json_raw = response.read().decode('utf8')
 places = json.loads(json_raw)
 
 # Print the places
 for place in places['results']:
-	print json.dumps(place)
+	print(json.dumps(place))
