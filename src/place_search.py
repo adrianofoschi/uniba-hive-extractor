@@ -10,7 +10,7 @@ LOCATION = sys.argv[1]
 RADIUS = 30
 
 # Set the Places API key
-AUTH_KEY = "AIzaSyA2aUkM1yzJVr6ZMLAaJsXQss4Fg8g-RI0"
+AUTH_KEY = "..."
 
 # Create and send the request
 endpoint = ('https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
