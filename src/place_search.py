@@ -7,7 +7,7 @@ import sys
 LOCATION = sys.argv[1]
 
 # Define the radius (in meters)
-RADIUS = 30
+RADIUS = 300
 
 # Set the Places API key
 AUTH_KEY = "..."
@@ -23,4 +23,5 @@ places = json.loads(json_raw)
 
 # Print the places
 for place in places['results']:
+	place['hotspot_id'] = ("%s") % (LOCATION)
 	print(json.dumps(place))
